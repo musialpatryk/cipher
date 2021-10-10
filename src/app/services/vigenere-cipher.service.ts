@@ -6,19 +6,70 @@ import {Injectable} from '@angular/core';
 })
 export class VigenereCipherService {
   private alphabet = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+  private key;
   private matrix: string[][];
 
   encode(value: string, key: string): string {
-    this.matrix = this.computeMatrix();
-
-    if (key.length !== value.length) {
-      key = this.transformKey(key, value.length);
+    if (!this.matrix) {
+      this.matrix = this.computeMatrix();
     }
-    const valueCharIndex = this.alphabet.findIndex(char => char === 'O');
-    const passwordCharIndex = this.alphabet.findIndex(char => char === 'A');
-    console.log(valueCharIndex, passwordCharIndex);
-    console.log(this.matrix[valueCharIndex][passwordCharIndex]);
-    return value;
+    this.key = this.transformKey(key, value.length);
+
+    let keyIndex = 0;
+    const encodedValueArray = Array.from(value).map((char) => {
+      const encodedChar = this.encodeCharacter(char, this.key[keyIndex]);
+
+      if (char !== ' ') {
+        keyIndex++;
+      }
+      return encodedChar;
+    });
+
+    return encodedValueArray.join('');
+  }
+
+  decode(encodedValue: string, key: string): string {
+    if (!this.matrix) {
+      this.matrix = this.computeMatrix();
+    }
+    this.key = this.transformKey(key, encodedValue.length);
+
+    let keyIndex = 0;
+    const decodedValueArray = Array.from(encodedValue).map((char) => {
+      const decodedChar = this.decodeCharacter(char, this.key[keyIndex]);
+
+      if (char !== ' ') {
+        keyIndex++;
+      }
+      return decodedChar;
+    });
+
+    return decodedValueArray.join('');
+  }
+
+  private decodeCharacter(characterToDecode: string, passwordChar: string): string {
+    if (characterToDecode === ' ') {
+      return characterToDecode;
+    }
+
+    const col = this.matrix[0].findIndex(char => char === passwordChar);
+    const row = this.matrix.findIndex((char, index) => {
+      return characterToDecode === this.matrix[index][col];
+    });
+    console.log(this.matrix[row][0]);
+
+    return this.matrix[row][0];
+  }
+
+  private encodeCharacter(characterToEncode: string, passwordChar: string): string {
+    if (characterToEncode === ' ') {
+      return characterToEncode;
+    }
+
+    const characterToEncodeIndex = this.alphabet.findIndex(char => char === characterToEncode);
+    const passwordCharIndex = this.alphabet.findIndex(char => char === passwordChar);
+
+    return this.matrix[characterToEncodeIndex][passwordCharIndex];
   }
 
   getMatrix(): string[][] {

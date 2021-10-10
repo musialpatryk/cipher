@@ -8,6 +8,7 @@ import {VigenereCipherService} from '../services/vigenere-cipher.service';
 export class MainComponent {
   textToEncode = 'TO JEST BARDZO TAJNY TEKST';
   encodedText: string;
+  decodedText: string;
   matrix: string[][];
 
   constructor(
@@ -18,5 +19,9 @@ export class MainComponent {
 
   encode(): void {
     this.encodedText = this.cipher.encode(this.textToEncode, 'TAJNE');
+  }
+
+  decode(): void {
+    this.decodedText = this.cipher.decode('MO SRWM BJEHSO CNNGY CROLT', 'TAJNE');
   }
 }
