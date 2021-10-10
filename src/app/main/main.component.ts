@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {VigenereCipherService} from '../services/vigenere-cipher.service';
+import {IVisualizationStep, VigenereCipherService} from '../services/vigenere-cipher.service';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +10,20 @@ export class MainComponent {
   encodedText: string;
   decodedText: string;
   matrix: string[][];
+  visualizationSteps: IVisualizationStep[];
 
   constructor(
     private cipher: VigenereCipherService
   ) {
-    this.matrix = cipher.getMatrix();
   }
 
   encode(): void {
     this.encodedText = this.cipher.encode(this.textToEncode, 'TAJNE');
+    this.visualizationSteps = this.cipher.getVisualizationSteps();
   }
 
   decode(): void {
-    this.decodedText = this.cipher.decode('MO SRWM BJEHSO CNNGY CROLT', 'TAJNE');
+    this.decodedText = this.cipher.decode(this.encodedText, 'TAJNE');
+    this.visualizationSteps = this.cipher.getVisualizationSteps();
   }
 }

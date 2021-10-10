@@ -1,23 +1,31 @@
 import {Injectable} from '@angular/core';
 
+export interface IVisualizationStep {
+  id: number;
+  prevChar: string;
+  nextChar: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class VigenereCipherService {
   private alphabet = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-  private key;
   private matrix: string[][];
+  private visualizationSteps: IVisualizationStep[] = [];
 
   encode(value: string, key: string): string {
+    this.resetVisualizationSteps();
+
     if (!this.matrix) {
       this.matrix = this.computeMatrix();
     }
-    this.key = this.transformKey(key, value.length);
+
+    key = this.transformKey(key, value.length);
 
     let keyIndex = 0;
     const encodedValueArray = Array.from(value).map((char) => {
-      const encodedChar = this.encodeCharacter(char, this.key[keyIndex]);
+      const encodedChar = this.encodeCharacter(char, key[keyIndex]);
 
       if (char !== ' ') {
         keyIndex++;
@@ -29,14 +37,16 @@ export class VigenereCipherService {
   }
 
   decode(encodedValue: string, key: string): string {
+    this.resetVisualizationSteps();
+
     if (!this.matrix) {
       this.matrix = this.computeMatrix();
     }
-    this.key = this.transformKey(key, encodedValue.length);
+    key = this.transformKey(key, encodedValue.length);
 
     let keyIndex = 0;
     const decodedValueArray = Array.from(encodedValue).map((char) => {
-      const decodedChar = this.decodeCharacter(char, this.key[keyIndex]);
+      const decodedChar = this.decodeCharacter(char, key[keyIndex]);
 
       if (char !== ' ') {
         keyIndex++;
@@ -45,6 +55,21 @@ export class VigenereCipherService {
     });
 
     return decodedValueArray.join('');
+  }
+
+  getAlphabet(): string {
+    return this.alphabet.join(' ');
+  }
+
+  getVisualizationSteps(): IVisualizationStep[] {
+    return this.visualizationSteps;
+  }
+
+  /**
+   * Add all characters from given string to alphabet.
+   */
+  widenAlphabet(charactersString: string): void {
+    this.alphabet.push(...Array.from(charactersString));
   }
 
   private decodeCharacter(characterToDecode: string, passwordChar: string): string {
@@ -56,9 +81,10 @@ export class VigenereCipherService {
     const row = this.matrix.findIndex((char, index) => {
       return characterToDecode === this.matrix[index][col];
     });
-    console.log(this.matrix[row][0]);
+    const decodedChar = this.matrix[row][0];
 
-    return this.matrix[row][0];
+    this.registerStep(characterToDecode, decodedChar);
+    return decodedChar;
   }
 
   private encodeCharacter(characterToEncode: string, passwordChar: string): string {
@@ -68,8 +94,11 @@ export class VigenereCipherService {
 
     const characterToEncodeIndex = this.alphabet.findIndex(char => char === characterToEncode);
     const passwordCharIndex = this.alphabet.findIndex(char => char === passwordChar);
+    const encodedChar = this.matrix[characterToEncodeIndex][passwordCharIndex];
 
-    return this.matrix[characterToEncodeIndex][passwordCharIndex];
+    this.registerStep(characterToEncode, encodedChar);
+
+    return encodedChar;
   }
 
   getMatrix(): string[][] {
@@ -114,5 +143,17 @@ export class VigenereCipherService {
     }
 
     return transformedKey;
+  }
+
+  private registerStep(prevChar: string, nextChar: string): void {
+    this.visualizationSteps.push({
+      id: this.visualizationSteps.length,
+      prevChar,
+      nextChar
+    });
+  }
+
+  private resetVisualizationSteps(): void {
+    this.visualizationSteps = [];
   }
 }
