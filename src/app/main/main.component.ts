@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IVisualizationStep, VigenereCipherService} from '../services/vigenere-cipher.service';
+import {IVisualizationStep, VigenereCipherService} from 'src/app/services/vigenere-cipher.service';
 
 @Component({
   selector: 'app-root',
