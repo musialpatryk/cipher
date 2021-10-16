@@ -30,18 +30,18 @@
     </ul>
   </div>
 
-<!--  MatrixVisualization-->
-<!--  <div class="mb-5" *ngIf="encodedText">-->
-<!--    <div *ngFor="let level of matrix; let first = firs" class="row">-->
-<!--      <ng-container *ngIf="first">-->
-<!--        <div *ngFor="let char of level; let index = index">-->
-<!--          {{index}}-->
-<!--        </div>-->
-<!--      </ng-container>-->
+  MatrixVisualization
+  <div class="mb-5" *ngIf="encodedText">
+    <div *ngFor="let level of matrix; let first = firs" class="row">
+      <ng-container *ngIf="first">
+        <div *ngFor="let char of level; let index = index">
+          {{index}}
+        </div>
+      </ng-container>
 
-<!--      <div *ngFor="let char of level">-->
-<!--        {{char}}-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+      <div *ngFor="let char of level">
+        {{char}}
+      </div>
+    </div>
+  </div>
 </div>
