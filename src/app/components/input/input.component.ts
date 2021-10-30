@@ -4,17 +4,17 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
 @Component({
-  selector: 'app-encode-input',
-  templateUrl: './encode-input.component.html'
+  selector: 'app-input',
+  templateUrl: './input.component.html'
 })
-export class EncodeInputComponent implements OnInit, OnChanges, OnDestroy {
-  encodeText = new FormControl();
+export class InputComponent implements OnInit, OnChanges, OnDestroy {
+  control = new FormControl();
   @Input() textInput: string;
   @Output() readonly textInputChange = new EventEmitter<string>();
   private destroy$ = new Subject<void>();
 
  ngOnInit(): void {
-   this.encodeText.valueChanges
+   this.control.valueChanges
      .pipe(takeUntil(this.destroy$))
      .subscribe((value) => {
        this.textInputChange.emit(value);
@@ -23,7 +23,7 @@ export class EncodeInputComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.textInput?.currentValue) {
-      this.encodeText.setValue(this.textInput);
+      this.control.setValue(this.textInput);
     }
   }
 

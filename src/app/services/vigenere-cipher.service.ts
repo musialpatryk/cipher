@@ -6,12 +6,14 @@ export interface IVisualizationStep {
   nextChar: string;
 }
 
+export type IMatrix = string[][];
+
 @Injectable({
   providedIn: 'root'
 })
 export class VigenereCipherService {
   private alphabet = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-  private matrix: string[][];
+  private matrix: IMatrix;
   private visualizationSteps: IVisualizationStep[] = [];
 
   encode(value: string, key: string): string {

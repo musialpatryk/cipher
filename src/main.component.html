@@ -1,0 +1,14 @@
+<div class="container mt-2">
+  <nav>
+    <ul class="d-flex justify-content-between list-unstyled">
+      <li routerLink=""
+          routerLinkActive="font-weight-bold"
+          [routerLinkActiveOptions]="{ exact: true }">
+        Documentation
+      </li>
+      <li routerLink="encode" routerLinkActive="font-weight-bold">Encode</li>
+      <li routerLink="decode" routerLinkActive="font-weight-bold">Decode</li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

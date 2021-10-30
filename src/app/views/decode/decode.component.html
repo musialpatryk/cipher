@@ -1,0 +1,17 @@
+<div class="mb-5">
+  <div class="mb-5">
+    <h1>Decode</h1>
+    <app-input class="mb-4" [(textInput)]="encodedText">
+      Text to decode:
+    </app-input>
+    <button (click)="decode()" class="btn btn-primary mt-2">
+      Decode text
+    </button>
+  </div>
+
+  <div class="mb-5" *ngIf="decodedText">
+    <app-output class="mb-4" [output]="decodedText">
+      Decoded output
+    </app-output>
+  </div>
+</div>

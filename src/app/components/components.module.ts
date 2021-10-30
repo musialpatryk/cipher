@@ -1,13 +1,27 @@
 import {NgModule} from '@angular/core';
-import {EncodeOutputComponent} from './encode-output/encode-output.component';
+import {OutputComponent} from './output/output.component';
+import {InputComponent} from './input/input.component';
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
+import { VisualizationComponent } from './visualization/visualization.component';
+import { MatrixComponent } from './matrix/matrix.component';
 
 
 @NgModule({
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
   declarations: [
-    EncodeOutputComponent
+    OutputComponent,
+    InputComponent,
+    VisualizationComponent,
+    MatrixComponent
   ],
   exports: [
-    EncodeOutputComponent
+    OutputComponent,
+    InputComponent,
+    VisualizationComponent
   ]
 })
 export class ComponentsModule {

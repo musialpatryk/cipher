@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { MainComponent } from './app/main/main.component';
-import {EncodeInputModule} from './app/modules/encode-input/encode-input.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {ComponentsModule} from './app/components/components.module';
+import { MainComponent } from './main.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {AppRoutingModule} from './app/app-routing.module';
+import {ViewsModule} from './app/views/views.module';
 
 @NgModule({
   declarations: [
-    MainComponent
+    MainComponent,
   ],
   imports: [
+    AppRoutingModule,
+    ViewsModule,
     BrowserModule,
-    ComponentsModule,
-    EncodeInputModule,
     NgbModule
   ],
   bootstrap: [MainComponent]
