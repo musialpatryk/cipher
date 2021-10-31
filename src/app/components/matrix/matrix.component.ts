@@ -9,6 +9,7 @@ import {IMatrix, VigenereCipherService} from '../../services/vigenere-cipher.ser
 })
 export class MatrixComponent implements OnChanges {
   @Input() currentVisualizationStep: ICurrentVisualizationStep;
+  @Input() decodeMode = true;
   matrix: IMatrix;
   inputCharIndex: number;
   keyCharIndex: number;

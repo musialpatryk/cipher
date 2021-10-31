@@ -1,8 +1,7 @@
 import {Component, Input, OnChanges, OnDestroy, SimpleChanges} from '@angular/core';
 import {IVisualizationStep} from '../../services/vigenere-cipher.service';
-import {Subject} from 'rxjs';
-import {interval} from 'rxjs/internal/observable/interval';
-import {takeUntil} from 'rxjs/internal/operators/takeUntil';
+import {Subject, interval} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 export interface ICurrentVisualizationStep {
   step: IVisualizationStep;
@@ -15,7 +14,7 @@ export interface ICurrentVisualizationStep {
   styleUrls: ['./visualization.component.css']
 })
 export class VisualizationComponent implements OnChanges, OnDestroy {
-  @Input() header: string;
+  @Input() mode = false;
   @Input() visualizationSteps: IVisualizationStep[];
 
   currentlyPlaying = false;

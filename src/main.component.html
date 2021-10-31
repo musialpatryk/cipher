@@ -1,14 +1,43 @@
-<div class="container mt-2">
-  <nav>
-    <ul class="d-flex justify-content-between list-unstyled">
-      <li routerLink=""
-          routerLinkActive="font-weight-bold"
-          [routerLinkActiveOptions]="{ exact: true }">
-        Documentation
+<div class="mb-5">
+  <nav class="navbar navbar-dark bg-dark navbar-expand">
+    <ul class="navbar-nav container">
+      <li class="nav-item">
+        <a class="nav-link"
+           routerLink=""
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: true }">
+          Documentation
+        </a>
       </li>
-      <li routerLink="encode" routerLinkActive="font-weight-bold">Encode</li>
-      <li routerLink="decode" routerLinkActive="font-weight-bold">Decode</li>
+      <li class="nav-item">
+        <a class="nav-link"
+           routerLink="encode"
+           routerLinkActive="active">
+          Encode
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"
+           routerLink="decode"
+           routerLinkActive="active">
+          Decode
+        </a>
+      </li>
     </ul>
   </nav>
+</div>
+
+<div class="container">
   <router-outlet></router-outlet>
 </div>
+
+
+<!--<ul class="d-flex justify-content-between list-unstyled">-->
+<!--  <li routerLink=""-->
+<!--      routerLinkActive="font-weight-bold"-->
+<!--      [routerLinkActiveOptions]="{ exact: true }">-->
+<!--    Documentation-->
+<!--  </li>-->
+<!--  <li routerLink="encode" routerLinkActive="font-weight-bold">Encode</li>-->
+<!--  <li routerLink="decode" routerLinkActive="font-weight-bold">Decode</li>-->
+<!--</ul>-->

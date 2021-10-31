@@ -1,35 +1,75 @@
 <div class="my-2 d-flex justify-content-center">
+
+
  <table class="w-75 table table-bordered table-sm table-striped">
-   <thead>
-      <tr>
-       <th *ngFor="let char of matrix[0];let index = index"
-           class="text-center"
-           [ngClass]="[
+   <ng-container [ngSwitch]="decodeMode">
+     <ng-container *ngSwitchCase="false">
+       <thead>
+       <tr>
+         <th *ngFor="let char of matrix[0];let index = index"
+             class="text-center"
+             [ngClass]="[
             index === inputCharIndex && !(index === inputCharIndex && keyCharIndex === 0) ? 'bg-danger' : '',
             index === keyCharIndex && keyCharIndex === 0 && !(index === inputCharIndex && keyCharIndex === 0) ? 'bg-danger' : '',
             keyCharIndex === 0 && !(index === inputCharIndex && keyCharIndex === 0) ? 'bg-info' : '',
             index === inputCharIndex && keyCharIndex === 0 ? 'bg-success' : ''
            ]">
-         {{char}}
-       </th>
-     </tr>
-   </thead>
-   <tbody>
-     <ng-container *ngFor="let level of matrix;let firstLevel = first;let index = index">
-       <tr *ngIf="!firstLevel">
-         <td *ngFor="let char of level;let firstChar = first;let charIndex = index"
-             class="text-center"
-             [ngClass]="[
+           {{char}}
+         </th>
+       </tr>
+       </thead>
+       <tbody>
+       <ng-container *ngFor="let level of matrix;let firstLevel = first;let index = index">
+         <tr *ngIf="!firstLevel">
+           <td *ngFor="let char of level;let firstChar = first;let charIndex = index"
+               class="text-center"
+               [ngClass]="[
               firstChar ? 'font-weight-bold' : '',
               firstChar && index === keyCharIndex ? 'bg-danger' : '',
               inputCharIndex === charIndex && !(inputCharIndex === charIndex && keyCharIndex === index)  ? 'bg-info' : '',
               keyCharIndex === index && !(inputCharIndex === charIndex && keyCharIndex === index) ? 'bg-info' : '',
               inputCharIndex === charIndex && keyCharIndex === index ? 'bg-success' : ''
              ]">
-           {{char}}
-         </td>
-       </tr>
+             {{char}}
+           </td>
+         </tr>
+       </ng-container>
+       </tbody>
      </ng-container>
-   </tbody>
+
+     <ng-container *ngSwitchCase="true">
+       <thead>
+       <tr>
+         <th *ngFor="let char of matrix[0];let index = index"
+             class="text-center"
+             [ngClass]="[
+            index === inputCharIndex ? 'bg-success' : '',
+            index === keyCharIndex && keyCharIndex === 0 && !(index === inputCharIndex) ? 'bg-danger' : '',
+            keyCharIndex === 0 && !(index === inputCharIndex && keyCharIndex === 0) ? 'bg-info' : '',
+           ]">
+           {{char}}
+         </th>
+       </tr>
+       </thead>
+       <tbody>
+       <ng-container *ngFor="let level of matrix;let firstLevel = first;let index = index">
+         <tr *ngIf="!firstLevel">
+           <td *ngFor="let char of level;let firstChar = first;let charIndex = index"
+               class="text-center"
+               [ngClass]="[
+              firstChar ? 'font-weight-bold' : '',
+              inputCharIndex === charIndex && !(inputCharIndex === charIndex && keyCharIndex === index)  ? 'bg-info' : '',
+              keyCharIndex === index && !(firstChar && index === keyCharIndex) ? 'bg-info' : '',
+              inputCharIndex === charIndex && keyCharIndex === index ? 'bg-danger' : '',
+              firstChar && index === keyCharIndex ? 'bg-danger' : ''
+             ]">
+             {{char}}
+           </td>
+         </tr>
+       </ng-container>
+       </tbody>
+     </ng-container>
+
+   </ng-container>
  </table>
 </div>

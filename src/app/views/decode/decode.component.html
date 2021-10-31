@@ -1,17 +1,34 @@
-<div class="mb-5">
-  <div class="mb-5">
-    <h1>Decode</h1>
-    <app-input class="mb-4" [(textInput)]="encodedText">
+<h1>Decode</h1>
+
+<div class="card mb-5">
+  <div class="card-body">
+    <app-input [(textInput)]="encodedText">
       Text to decode:
+    </app-input>
+    <app-input [(textInput)]="passwordKey" [removeWhitespaces]="true">
+      Password:
     </app-input>
     <button (click)="decode()" class="btn btn-primary mt-2">
       Decode text
     </button>
   </div>
+</div>
 
-  <div class="mb-5" *ngIf="decodedText">
-    <app-output class="mb-4" [output]="decodedText">
-      Decoded output
-    </app-output>
+<div class="card mb-5" *ngIf="decodedText">
+  <div class="card-body">
+    <div class="mb-5">
+      <app-output [output]="decodedText">
+        Decoded output
+      </app-output>
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="visualize" [formControl]="visualizationControl">
+        <label class="custom-control-label" for="visualize">Show visualization</label>
+      </div>
+    </div>
+    <app-visualization
+      *ngIf="visualizationControl.value"
+      [mode]="true"
+      [visualizationSteps]="visualizationSteps">
+    </app-visualization>
   </div>
 </div>

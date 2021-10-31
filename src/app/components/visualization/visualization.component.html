@@ -1,5 +1,5 @@
 <div *ngIf="visualizationSteps">
-  <app-matrix [currentVisualizationStep]="currentStep">
+  <app-matrix [currentVisualizationStep]="currentStep" [decodeMode]="mode">
   </app-matrix>
 
   <h3 class="text-center"><small>Key: {{currentStep.step.keyChar}}</small></h3>
