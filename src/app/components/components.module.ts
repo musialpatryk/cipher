@@ -18,11 +18,12 @@ import { MatrixComponent } from './matrix/matrix.component';
     VisualizationComponent,
     MatrixComponent
   ],
-  exports: [
-    OutputComponent,
-    InputComponent,
-    VisualizationComponent
-  ]
+    exports: [
+        OutputComponent,
+        InputComponent,
+        VisualizationComponent,
+        MatrixComponent
+    ]
 })
 export class ComponentsModule {
 }
