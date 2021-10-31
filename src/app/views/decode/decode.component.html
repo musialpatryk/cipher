@@ -2,9 +2,12 @@
 
 <div class="card mb-5">
   <div class="card-body">
-    <app-input [(textInput)]="encodedText">
-      Tekst do odszyfrowania:
-    </app-input>
+    <div class="form-group">
+      <app-input [(textInput)]="encodedText">
+        Tekst do odszyfrowania:
+      </app-input>
+      <app-alphabet-controller></app-alphabet-controller>
+    </div>
     <app-input [(textInput)]="passwordKey" [removeWhitespaces]="true">
       Hasło:
     </app-input>

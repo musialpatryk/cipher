@@ -59,8 +59,8 @@ export class VigenereCipherService {
     return decodedValueArray.join('');
   }
 
-  getAlphabet(): string {
-    return this.alphabet.join(' ');
+  getAlphabet(): string[] {
+    return this.alphabet;
   }
 
   getVisualizationSteps(): IVisualizationStep[] {
