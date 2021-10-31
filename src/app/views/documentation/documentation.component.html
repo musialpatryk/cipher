@@ -1,1 +1,50 @@
-<h1>Documentation</h1>
+<h1 class="mb-5">Szyfr Vigenère'a</h1>
+
+<div>
+  <h2>Historia</h2>
+  <p>Szyfr Vigenère'a jest wieloalfabetowym szyfrem podstawieniowym, stworzonym przez włocha - Giovan Battista Bellaso.
+    Nazwa szyfru pochodzi od błędnego przekonania że jego twórcą był Blaise de Vigenère.</p>
+
+  <h2>Jak działa?</h2>
+  <p>Szyfr wymaga zastosowania hasła służącego do zakodowania informacji, co stanowi przewagę nad częścią szyfrów przestawieniowych,
+    w których konieczne jest przekazanie informacji na temat wszystkich przekształceń dostępnego alfabetu.</p>
+
+  <h4>Matryca</h4>
+  <p>Na podstawie ustalonego alfabetu (domyślnie jedynie litery alfabetu łacińskiego) formuje się matrycę,
+    której każdy kolejny wiersz zawiera alfabet przesunięty o jedną literę. Tak uformowana matryca została pierwszy raz użyta
+  przez Johannes Trithemius i jest nazywana "Tabula Recta".</p>
+  <div class="example-matrix">
+    <app-matrix></app-matrix>
+  </div>
+
+  <h4>Hasło</h4>
+  <p>Następnie do tekstu, który szyfrujemy przekształcane jest hasło tak by zawierało tyle samo znaków co tekst
+    (w przypadku za krótkiego hasła, jest ono powielane.</p>
+  <p>Na przykład dla hasła "TOR":</p>
+  <div class="w-100 d-flex justify-content-center">
+    <table class="w-50 table table-striped table-bordered text-center table-sm">
+      <tbody>
+      <tr><td>Tekst:</td><td>T</td><td>E</td><td>K</td><td>S</td><td>T</td></tr>
+      <tr><td>Hasło:</td><td>T</td><td>O</td><td>R</td><td>T</td><td>O</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Szyfrowanie</h4>
+  <p>W celu zaszyfrowania każdej z liter należy wybrać w pierwszym rzędzie kolumnę odpowiadającą szyfrowanej literze,
+    oraz rząd zawierający literę hasła w pierwszej kolumnie.</p>
+  <p>Litera znajdująca się na przecięciu tak wybranej kolumny i rzędu stanowi zaszyfrowaną wartość. Krok ten jest powtarzany dla całego tekstu wraz z hasłem.</p>
+  <p>Wizualizacja zaszyfrowania litery "S" i hasła "E", które po zaszyfrowaniu zmieniane jest na literę "W".</p>
+  <div class="example-matrix">
+    <app-matrix [currentVisualizationStep]="exampleStep"></app-matrix>
+  </div>
+
+  <h4>Odszyfrowywanie</h4>
+  <p>Odszyfrowanie wiadomości jest możliwe poprzez odwrócenie metody szyfrującej, czyli zlokalizowanie rzędu zawierającego w pierwszej kolumnie literę hasła
+   oraz w tym rzędzie zaszyfrowanej litery.</p>
+  <p>Następnie można odczytać odszyfrowaną literę z pierwszego rzędu kolumny znalezionej kolumny.</p>
+  <p>Wizualizacja odszyfrowywania litery "W" za pomocą hasła "E", które zmieniane jest ponownie na literę "S".</p>
+  <div class="example-matrix">
+    <app-matrix [currentVisualizationStep]="decodeExampleStep" [decodeMode]="true"></app-matrix>
+  </div>
+</div>
