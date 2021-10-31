@@ -1,15 +1,18 @@
-<h1>Encode</h1>
+<h1 class="mb-4">Szyfrowanie</h1>
 
 <div class="card mb-5">
  <div class="card-body">
-   <app-input [(textInput)]="textToEncode">
-     Text to encode:
-   </app-input>
+   <div class="form-group">
+     <app-input [(textInput)]="textToEncode">
+       Tekst do zaszyfrowania:
+     </app-input>
+     <app-alphabet-controller></app-alphabet-controller>
+   </div>
    <app-input [(textInput)]="passwordKey" [removeWhitespaces]="true">
-     Password:
+     Hasło:
    </app-input>
-   <button (click)="encode()" class="btn btn-primary mt-2">
-     Encode text
+   <button (click)="encode()" class="btn btn-success mt-2">
+     Szyfruj
    </button>
  </div>
 </div>
@@ -18,16 +21,15 @@
  <div class="card-body">
    <div class="mb-5">
      <app-output [output]="encodedText">
-       Encoded output
+       Zaszyfrowany tekst
      </app-output>
      <div class="custom-control custom-switch">
        <input type="checkbox" class="custom-control-input" id="visualize" [formControl]="visualizationControl">
-       <label class="custom-control-label" for="visualize">Show visualization</label>
+       <label class="custom-control-label" for="visualize">{{visualizationControl.value ? 'Ukryj wizualizacje' : 'Pokaż wizualizacje'}}</label>
      </div>
    </div>
    <app-visualization
      *ngIf="visualizationControl.value"
-     header="Encoding visualization"
      [visualizationSteps]="visualizationSteps">
    </app-visualization>
  </div>
