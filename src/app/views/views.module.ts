@@ -8,7 +8,7 @@ import {DecodeModule} from './decode/decode.module';
   imports: [
     CommonModule,
     EncodeModule,
-    DecodeModule
+    DecodeModule,
   ],
   exports: [
     EncodeModule

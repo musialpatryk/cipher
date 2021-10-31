@@ -20,7 +20,7 @@ export class VisualizationComponent implements OnChanges, OnDestroy {
 
   currentlyPlaying = false;
   private stopPlaying$ = new Subject<void>();
-  private sliderTimeout = 500;
+  private sliderTimeout = 1000;
 
   currentStep: ICurrentVisualizationStep;
 
@@ -64,6 +64,10 @@ export class VisualizationComponent implements OnChanges, OnDestroy {
 
   next(): void {
     const index = this.currentStep.index + 1;
+
+    if (index > this.visualizationSteps.length - 1) {
+      return;
+    }
     this.currentStep = {
       step: this.visualizationSteps[index],
       index
@@ -78,7 +82,7 @@ export class VisualizationComponent implements OnChanges, OnDestroy {
   }
 
   private stopPlayingOnLastStep(): void {
-    if (this.currentStep.index !== this.visualizationSteps.length - 2) {
+    if (this.currentStep.index < this.visualizationSteps.length - 2) {
       return;
     }
 

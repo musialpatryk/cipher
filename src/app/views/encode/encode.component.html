@@ -1,22 +1,36 @@
 <h1>Encode</h1>
 
-<div class="mb-5">
-  <app-input class="mb-4" [(textInput)]="textToEncode">
-    Text to encode:
-  </app-input>
-  <button (click)="encode()" class="btn btn-primary mt-2">
-    Encode text
-  </button>
+<div class="card mb-5">
+ <div class="card-body">
+   <app-input [(textInput)]="textToEncode">
+     Text to encode:
+   </app-input>
+   <app-input [(textInput)]="passwordKey" [removeWhitespaces]="true">
+     Password:
+   </app-input>
+   <button (click)="encode()" class="btn btn-primary mt-2">
+     Encode text
+   </button>
+ </div>
 </div>
 
-<div class="mb-5" *ngIf="encodedText">
-  <app-output class="mb-4" [output]="encodedText">
-    Encoded output
-  </app-output>
-</div>
-
-<div class="mb-5">
-  <app-visualization header="Encoding visualization" [visualizationSteps]="visualizationSteps"></app-visualization>
+<div class="card mb-5" *ngIf="encodedText">
+ <div class="card-body">
+   <div class="mb-5">
+     <app-output [output]="encodedText">
+       Encoded output
+     </app-output>
+     <div class="custom-control custom-switch">
+       <input type="checkbox" class="custom-control-input" id="visualize" [formControl]="visualizationControl">
+       <label class="custom-control-label" for="visualize">Show visualization</label>
+     </div>
+   </div>
+   <app-visualization
+     *ngIf="visualizationControl.value"
+     header="Encoding visualization"
+     [visualizationSteps]="visualizationSteps">
+   </app-visualization>
+ </div>
 </div>
 
 

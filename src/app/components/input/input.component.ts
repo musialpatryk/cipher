@@ -8,16 +8,17 @@ import {Subject} from 'rxjs';
   templateUrl: './input.component.html'
 })
 export class InputComponent implements OnInit, OnChanges, OnDestroy {
-  control = new FormControl();
+  @Input() removeWhitespaces = false;
   @Input() textInput: string;
   @Output() readonly textInputChange = new EventEmitter<string>();
+  control = new FormControl();
   private destroy$ = new Subject<void>();
 
  ngOnInit(): void {
    this.control.valueChanges
      .pipe(takeUntil(this.destroy$))
      .subscribe((value) => {
-       this.textInputChange.emit(value);
+       this.textInputChange.emit(this.removeWhitespaces ? value.replace(/\s/g, '') : value);
      });
  }
 

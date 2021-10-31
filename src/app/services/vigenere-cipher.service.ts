@@ -4,6 +4,7 @@ export interface IVisualizationStep {
   id: number;
   prevChar: string;
   nextChar: string;
+  keyChar: string;
 }
 
 export type IMatrix = string[][];
@@ -24,7 +25,6 @@ export class VigenereCipherService {
     }
 
     key = this.transformKey(key, value.length);
-
     let keyIndex = 0;
     const encodedValueArray = Array.from(value).map((char) => {
       const encodedChar = this.encodeCharacter(char, key[keyIndex]);
@@ -85,7 +85,7 @@ export class VigenereCipherService {
     });
     const decodedChar = this.matrix[row][0];
 
-    this.registerStep(characterToDecode, decodedChar);
+    this.registerStep(characterToDecode, decodedChar, passwordChar);
     return decodedChar;
   }
 
@@ -98,7 +98,7 @@ export class VigenereCipherService {
     const passwordCharIndex = this.alphabet.findIndex(char => char === passwordChar);
     const encodedChar = this.matrix[characterToEncodeIndex][passwordCharIndex];
 
-    this.registerStep(characterToEncode, encodedChar);
+    this.registerStep(characterToEncode, encodedChar, passwordChar);
 
     return encodedChar;
   }
@@ -147,11 +147,12 @@ export class VigenereCipherService {
     return transformedKey;
   }
 
-  private registerStep(prevChar: string, nextChar: string): void {
+  private registerStep(prevChar: string, nextChar: string, keyChar: string): void {
     this.visualizationSteps.push({
       id: this.visualizationSteps.length,
       prevChar,
-      nextChar
+      nextChar,
+      keyChar
     });
   }
 
