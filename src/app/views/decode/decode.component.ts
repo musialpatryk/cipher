@@ -20,8 +20,7 @@ export class DecodeComponent {
   }
 
   decode(): void {
-    this.decodedText = this.cipher.decode(this.encodedText, 'TAJNE');
+    this.decodedText = this.cipher.decode(this.encodedText, this.passwordKey);
     this.visualizationSteps = this.cipher.getVisualizationSteps();
-    console.log(this.visualizationSteps);
   }
 }
