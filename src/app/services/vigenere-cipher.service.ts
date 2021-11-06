@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
 
 export interface IVisualizationStep {
   id: number;
@@ -14,6 +15,7 @@ export type IMatrix = string[][];
 })
 export class VigenereCipherService {
   private alphabet = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+  private alphabetChangeSubject = new Subject<string[]>();
   private matrix: IMatrix;
   private visualizationSteps: IVisualizationStep[] = [];
 
@@ -67,11 +69,16 @@ export class VigenereCipherService {
     return this.visualizationSteps;
   }
 
+  alphabetChanges(): Observable<string[]> {
+    return this.alphabetChangeSubject.asObservable();
+  }
+
   /**
    * Add all characters from given string to alphabet.
    */
   widenAlphabet(charactersString: string): void {
     this.alphabet.push(...Array.from(charactersString));
+    this.alphabetChangeSubject.next(this.alphabet);
   }
 
   private decodeCharacter(characterToDecode: string, passwordChar: string): string {
