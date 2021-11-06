@@ -8,6 +8,9 @@
   </textarea>
 </div>
 
-<div class="alert alert-danger" role="alert" *ngIf="control.errors">
+<div class="alert alert-danger mb-1" role="alert" *ngIf="control.errors?.pattern">
   Pole nie może zawierać znaków spoza alfabetu!
+</div>
+<div class="alert alert-info mb-1" role="alert" *ngIf="control.errors?.maxlength">
+  Aplikacja ma na celu jedynie zaprezentowanie działania algorytmu i nie jest zoptymalizowana do działania dla dłuższych tekstów / haseł!
 </div>
