@@ -7,3 +7,7 @@
             [formControl]="control">
   </textarea>
 </div>
+
+<div class="alert alert-danger" role="alert" *ngIf="control.errors">
+  Pole nie może zawierać znaków spoza alfabetu!
+</div>
