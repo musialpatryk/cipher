@@ -47,7 +47,10 @@ export class InputComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private updateValidators(): void {
-    this.control.setValidators(Validators.pattern(this.computePattern()));
+    this.control.setValidators([
+      Validators.pattern(this.computePattern()),
+      Validators.maxLength(255)
+    ]);
     this.control.updateValueAndValidity();
   }
 
