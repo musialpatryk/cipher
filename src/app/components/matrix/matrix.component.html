@@ -25,7 +25,7 @@
                class="text-center"
                [ngClass]="[
               firstChar ? 'font-weight-bold' : '',
-              firstChar && index === keyCharIndex ? 'bg-danger' : '',
+              firstChar && index === keyCharIndex && !(inputCharIndex === charIndex && keyCharIndex === index) ? 'bg-danger' : '',
               inputCharIndex === charIndex && !(inputCharIndex === charIndex && keyCharIndex === index)  ? 'bg-info' : '',
               keyCharIndex === index && !(inputCharIndex === charIndex && keyCharIndex === index) ? 'bg-info' : '',
               inputCharIndex === charIndex && keyCharIndex === index ? 'bg-success' : ''
