@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {UntypedFormControl, Validators} from '@angular/forms';
 import {VigenereCipherService} from '../../services/vigenere-cipher.service';
 
 
@@ -8,8 +8,8 @@ import {VigenereCipherService} from '../../services/vigenere-cipher.service';
   templateUrl: './alphabet-controller.component.html'
 })
 export class AlphabetControllerComponent {
-  visibilityControl = new FormControl(false);
-  newCharControl = new FormControl('', Validators.maxLength(1));
+  visibilityControl = new UntypedFormControl(false);
+  newCharControl = new UntypedFormControl('', Validators.maxLength(1));
   alphabet: string[];
   error = false;
 

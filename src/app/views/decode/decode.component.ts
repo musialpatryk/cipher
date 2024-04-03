@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {IVisualizationStep, VigenereCipherService} from '../../services/vigenere-cipher.service';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class DecodeComponent {
   passwordKey = 'TAJNE';
   decodedText: string;
   visualizationSteps: IVisualizationStep[];
-  visualizationControl = new FormControl(false);
+  visualizationControl = new UntypedFormControl(false);
 
   constructor(
     private cipher: VigenereCipherService

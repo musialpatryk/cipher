@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {UntypedFormControl, Validators} from '@angular/forms';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {VigenereCipherService} from '../../services/vigenere-cipher.service';
@@ -12,7 +12,7 @@ export class InputComponent implements OnInit, OnChanges, OnDestroy {
   @Input() removeWhitespaces = false;
   @Input() textInput: string;
   @Output() readonly textInputChange = new EventEmitter<string>();
-  control = new FormControl();
+  control = new UntypedFormControl();
   private destroy$ = new Subject<void>();
 
   constructor(

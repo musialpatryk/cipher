@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {IVisualizationStep, VigenereCipherService} from '../../services/vigenere-cipher.service';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 
 
 @Component({
@@ -13,7 +13,7 @@ export class EncodeComponent {
   encodedText: string;
   visualizationSteps: IVisualizationStep[];
   matrix: string[][];
-  visualizationControl = new FormControl(false);
+  visualizationControl = new UntypedFormControl(false);
 
   constructor(
     private cipher: VigenereCipherService
